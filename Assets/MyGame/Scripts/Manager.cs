@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
+    void Start()
+    {
+        
+    }
+
+    void Update()
+    {
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("oha, there is the target, yay!");
+    }
+
+
     /*
      * man kann nicht über die Startlinie
      * Spiel beginnt wenn man Startlinie betritt
