@@ -4,19 +4,41 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
+    public int myLevel = 1;
+    public GameObject target;
+    public Transform pos1, pos2, pos3;
+
     void Start()
     {
-        
+        if (myLevel == 1)
+        {
+            target.transform.position = pos1.position;
+        }
     }
 
     void Update()
     {
-        
+
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            myLevel++;
+            if (myLevel==2)
+            {
+                target.transform.position = pos2.position;
+            }
+
+            Debug.Log("levelwechsel");
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("oha, there is the target, yay!");
+        if (tag=="tree")
+        {
+            Debug.Log("oha, there is the target, yay!");
+        }
     }
 
 
@@ -25,7 +47,7 @@ public class Manager : MonoBehaviour
      * Spiel beginnt wenn man Startlinie betritt
      * pro Versuch kann nur ein Baum genommen werden
      * messen der Wurfweite
-     * sehen ob die Zielscheibe getroffe wurde
+     * sehen ob die Zielscheibe getroffen wurde
      * Physics für Bäume
      * Toneffekte: ->  Baumaufprall (Boden und Zielscheibe), 
      *             ->  Weihnachtslied für Hintergrund

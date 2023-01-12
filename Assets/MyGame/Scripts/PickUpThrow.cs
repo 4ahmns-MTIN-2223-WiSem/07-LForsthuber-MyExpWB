@@ -16,6 +16,12 @@ public class PickUpThrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        distance = Vector3.Distance(item.transform.position, tempParent.transform.position);
+        if (distance >= 1f)
+        {
+            isHolding = false;
+        }
+
         if (isHolding == true)
         {
             item.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -24,6 +30,8 @@ public class PickUpThrow : MonoBehaviour
 
             if (Input.GetMouseButtonDown(1))
             {
+                item.GetComponent<Rigidbody>().AddForce(tempParent.transform.forward * throwForce);
+                isHolding = false;
 
             }
             else
@@ -38,9 +46,13 @@ public class PickUpThrow : MonoBehaviour
 
     void OnMouseDown()
     {
-        isHolding = true;
-        item.GetComponent<Rigidbody>().useGravity = false;
-        item.GetComponent<Rigidbody>().detectCollisions = true;
+        if (distance <= 1f)
+        {
+            isHolding = true;
+            item.GetComponent<Rigidbody>().useGravity = false;
+            item.GetComponent<Rigidbody>().detectCollisions = true;
+        }
+       
     }
 
     private void OnMouseUp()
