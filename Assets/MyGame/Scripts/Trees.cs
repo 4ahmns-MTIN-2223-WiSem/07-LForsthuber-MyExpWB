@@ -2,10 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragObject : MonoBehaviour
+public class Trees : MonoBehaviour
 {
     private Vector3 mOffset;
     private float mZCoord;
+
+    //public float thrust = 5f;
+    //public Rigidbody treeRb;
+
+    //void Start()
+    //{
+    //    treeRb = GetComponent<Rigidbody>()
+    //}
 
     private void OnMouseDown()
     {
@@ -24,5 +32,18 @@ public class DragObject : MonoBehaviour
     private void OnMouseDrag()
     {
         transform.position = GetMouseWorldPos() + mOffset;
+    }
+
+    //private void OnMouseUp()
+    //{
+    //    treeRb.AddForce(0, 0, thrust, ForceMode.Force);
+    //}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (tag == "tree")
+        {
+            Debug.Log("oha, there is the target, yay!");
+        }
     }
 }

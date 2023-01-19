@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Manager : MonoBehaviour
+public class LauraManager : MonoBehaviour
 {
     public int myLevel = 1;
     public GameObject target;
     public Transform pos1, pos2, pos3;
+    public GameObject tree1, tree2, tree3;
+    public Transform t1pos, t2pos, t3pos;
 
     void Start()
     {
@@ -19,7 +21,6 @@ public class Manager : MonoBehaviour
     void Update()
     {
 
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             myLevel++;
@@ -28,16 +29,16 @@ public class Manager : MonoBehaviour
                 target.transform.position = pos2.position;
             }
 
+            if (myLevel == 3)
+            {
+                target.transform.position = pos3.position;
+            }
+
             Debug.Log("levelwechsel");
-        }
 
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (tag=="tree")
-        {
-            Debug.Log("oha, there is the target, yay!");
+            tree1.transform.position = t1pos.position;
+            tree2.transform.position = t2pos.position;
+            tree3.transform.position = t3pos.position;
         }
     }
 
