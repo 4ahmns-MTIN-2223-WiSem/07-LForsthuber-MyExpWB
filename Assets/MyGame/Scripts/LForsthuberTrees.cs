@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trees : MonoBehaviour
+public class LForsthuberTrees : MonoBehaviour
 {
     private Vector3 mOffset;
     private float mZCoord;
@@ -39,11 +39,5 @@ public class Trees : MonoBehaviour
     //    treeRb.AddForce(0, 0, thrust, ForceMode.Force);
     //}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (tag == "tree")
-        {
-            Debug.Log("oha, there is the target, yay!");
-        }
-    }
+
 }

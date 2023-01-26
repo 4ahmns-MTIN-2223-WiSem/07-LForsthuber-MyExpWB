@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUpThrow : MonoBehaviour
+public class LForsthuberPickUpThrow : MonoBehaviour
 {
     float throwForce = 600;
     Vector3 objectPos;
