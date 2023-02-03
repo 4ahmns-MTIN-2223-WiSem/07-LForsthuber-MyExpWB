@@ -117,19 +117,4 @@ public class LForsthuberManager : MonoBehaviour
             endCanvas.SetActive(true);
         }
     }
-
-    /*
-     * man kann nicht ¸ber die Startlinie
-     * Spiel beginnt wenn man Startlinie betritt
-     * pro Versuch kann nur ein Baum genommen werden
-     * messen der Wurfweite
-     * Physics f¸r B‰ume
-     * Toneffekte: ->  Baumaufprall (Boden und Zielscheibe), 
-     *             ->  Weihnachtslied f¸r Hintergrund
-     *             ->  Ausreiﬂen der B‰ume
-     * 
-     * Enum: weiﬂ noch nicht
-     * Methodendeklaration/-aufruf: Braucht man immer
-     * If-Statement: z.B. hat der Baum die Zielscheibe getroffen ja/nein
-     */
 }
