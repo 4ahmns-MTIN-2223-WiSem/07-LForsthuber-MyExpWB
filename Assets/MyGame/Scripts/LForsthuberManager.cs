@@ -6,40 +6,86 @@ using System;
 
 public class LForsthuberManager : MonoBehaviour
 {
-    public int myLevel = 1;
+    private int myLevel = 1;
     public GameObject target;
     public Transform pos1, pos2, pos3;
     public GameObject tree1, tree2, tree3;
     public Transform t1Pos, t2Pos, t3Pos;
     public GameObject startPos;
-    public TMP_Text distanceText;
-    public TMP_Text levelText;
+    public TMP_Text distanceText, levelText, tryText;
+    public int nbrTrys;
+    public GameObject endCanvas;
+    public GameObject winCanvas;
 
-    private float startDistance;
+    public float startDistance;
     private float throwDistance;
 
+    private LForsthuberTrees mytree1, mytree2, mytree3;
+    private LForsthuberTrees states;
+
+    private void Awake()
+    {
+        nbrTrys = 3;
+
+    }
     void Start()
     {
+        endCanvas.SetActive(false);
+        winCanvas.SetActive(false);
+        states = FindObjectOfType<LForsthuberTrees>();
+
+        mytree1 = tree1.GetComponent<LForsthuberTrees>();
+        mytree2 = tree2.GetComponent<LForsthuberTrees>();
+        mytree3 = tree3.GetComponent<LForsthuberTrees>();
+
         if (myLevel == 1)
         {
             target.transform.position = pos1.position;
         }
 
-        startDistance = Vector3.Distance(startPos.transform.position, tree3.transform.position);
-        Debug.Log(startDistance);
     }
 
     void Update()
     {
-        throwDistance = Vector3.Distance(startPos.transform.position, tree3.transform.position);
-        double shortNumberDistance = Math.Round(throwDistance, 2);
+        Debug.Log(mytree1.myState);
 
-        distanceText.text = shortNumberDistance.ToString();
+        if (mytree1.myState == TreeState.idle)
+        {
+            distanceText.text = startDistance.ToString();
+        }
+        if (mytree1.myState == TreeState.thrown)
+        {
+            throwDistance = Vector3.Distance(startPos.transform.position, tree3.transform.position);
+            double shortNumberDistance = Math.Round(throwDistance, 2);
+            distanceText.text = shortNumberDistance.ToString();
+        }
+
+        if (mytree2.myState == TreeState.idle)
+        {
+            distanceText.text = startDistance.ToString();
+        }
+        if (mytree2.myState == TreeState.thrown)
+        {
+            throwDistance = Vector3.Distance(startPos.transform.position, tree3.transform.position);
+            double shortNumberDistance = Math.Round(throwDistance, 2);
+            distanceText.text = shortNumberDistance.ToString();
+        }
+
+        if (mytree3.myState == TreeState.idle)
+        {
+            distanceText.text = startDistance.ToString();
+        }
+        if (mytree3.myState == TreeState.thrown)
+        {
+            throwDistance = Vector3.Distance(startPos.transform.position, tree3.transform.position);
+            double shortNumberDistance = Math.Round(throwDistance, 2);
+            distanceText.text = shortNumberDistance.ToString();
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             myLevel++;
-            if (myLevel==2)
+            if (myLevel == 2)
             {
                 target.transform.position = pos2.position;
             }
@@ -49,16 +95,28 @@ public class LForsthuberManager : MonoBehaviour
                 target.transform.position = pos3.position;
             }
 
-            Debug.Log("levelwechsel");
+            nbrTrys = 3;
+
+            distanceText.text = startDistance.ToString();
 
             tree1.transform.position = t1Pos.position;
             tree2.transform.position = t2Pos.position;
             tree3.transform.position = t3Pos.position;
 
+            tree1.transform.rotation = t1Pos.rotation;
+            tree2.transform.rotation = t2Pos.rotation;
+            tree3.transform.rotation = t3Pos.rotation;
+
             levelText.text = "LEVEL " + myLevel;
+
+            winCanvas.SetActive(false);
+        }
+
+        if (nbrTrys == 0)
+        {
+            endCanvas.SetActive(true);
         }
     }
-
 
     /*
      * man kann nicht über die Startlinie
